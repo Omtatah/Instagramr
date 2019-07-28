@@ -40,7 +40,21 @@ def profile(request,id):
     return render(request,'profile/profile.html',{'user':user,'profile':profile,'images':images,'current_user':current_user})
 
 def no_profile(request,id):
-    
     user = User.objects.get(id=id)
     return render(request,'profile/no_profile.html',{"user":user})
 
+def search_results(request):
+    profile = Profile.objects.all
+    
+    if 'user' in request.GET and request.GET["user"]:
+        search_term = request.GET.get("user")
+        
+        searched_users = User.objects.filter(username__icontains=search_term)
+        
+        message = f"{search_term}"
+        
+        return render(request, 'searched.html',{"message":message,"users": searched_users,"profile":profile})
+
+    else:
+        message = "Please input a name in the search form"
+        return render(request, 'searched.html',{"message":message})
