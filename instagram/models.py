@@ -69,4 +69,17 @@ class Comment(models.Model):
         self.delete()
         
         
-            
+class Like(models.Model):
+    post = models.ForeignKey('Image')
+    user = models.ForeignKey(User)
+
+    class Meta:
+        unique_together = ("post", "user")
+
+    def __str__(self):
+        return 'Like: ' + self.user.username 
+
+class Followers(models.Model):
+    user = models.CharField(max_length=15)
+    follower = models.CharField(max_length=15)
+    following = models.CharField(max_length=15)            
