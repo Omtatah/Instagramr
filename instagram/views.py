@@ -39,5 +39,8 @@ def profile(request,id):
             
     return render(request,'profile/profile.html',{'user':user,'profile':profile,'images':images,'current_user':current_user})
 
-
+def no_profile(request,id):
+    
+    user = User.objects.get(id=id)
+    return render(request,'profile/no_profile.html',{"user":user})
 
