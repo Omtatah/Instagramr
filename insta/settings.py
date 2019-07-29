@@ -22,10 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -74,7 +70,7 @@ WSGI_APPLICATION = 'insta.wsgi.application'
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 # development
 if config('MODE')=="dev":
    DATABASES = {
@@ -85,8 +81,7 @@ if config('MODE')=="dev":
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
            'PORT': '',
-       }
-       
+       }       
    }
 # production
 else:
